@@ -1,3 +1,6 @@
+// Add flag at the top of the file
+const SHOW_AMMUNITION = false;
+
 // Navigation
 document.querySelectorAll('.nav-btn').forEach(button => {
     button.addEventListener('click', () => {
@@ -190,11 +193,239 @@ function populateNPCsData() {
     npcsSection.appendChild(npcsList);
 }
 
+// Populate gameplay data
+function populateGameplayData() {
+    populateEnemiesData();
+    if (SHOW_AMMUNITION) {
+        populateAmmunitionData();
+    }
+    populateItemsData();
+}
+
+function populateEnemiesData() {
+    const enemiesGrid = document.getElementById('enemies-data');
+    if (!enemiesGrid) return;
+
+    Object.entries(gameData.gameplay.enemies).forEach(([enemyName, enemyData]) => {
+        const enemyCard = document.createElement('div');
+        enemyCard.className = 'data-item';
+
+        const enemyTitle = document.createElement('h4');
+        enemyTitle.textContent = enemyData.displayName || enemyName;
+        enemyCard.appendChild(enemyTitle);
+
+        const stats = [
+            { label: 'Level', value: enemyData.level },
+            { label: 'Health', value: enemyData.health },
+            { label: 'Damage', value: enemyData.damage },
+            { label: 'Speed', value: enemyData.speed },
+            { label: 'Description', value: enemyData.description }
+        ];
+
+        stats.forEach(stat => {
+            if (stat.value) {
+                const property = document.createElement('div');
+                property.className = 'property';
+                property.innerHTML = `
+                    <span class="property-name">${stat.label}:</span>
+                    <span class="property-value">${stat.value}</span>
+                `;
+                enemyCard.appendChild(property);
+            }
+        });
+
+        if (enemyData.drops && enemyData.drops.length > 0) {
+            const dropsProperty = document.createElement('div');
+            dropsProperty.className = 'property';
+            dropsProperty.innerHTML = `
+                <span class="property-name">Drops:</span>
+                <span class="property-value">${enemyData.drops.join(', ')}</span>
+            `;
+            enemyCard.appendChild(dropsProperty);
+        }
+
+        enemiesGrid.appendChild(enemyCard);
+    });
+}
+
+function populateAmmunitionData() {
+    const bulletsSection = document.getElementById('bullets-data');
+    const cannonballsSection = document.getElementById('cannonballs-data');
+    const ammunitionSection = document.querySelector('.ammunition-section');
+
+    if (ammunitionSection) {
+        ammunitionSection.style.display = SHOW_AMMUNITION ? 'block' : 'none';
+    }
+    
+    if (!SHOW_AMMUNITION) return;
+
+    if (bulletsSection) {
+        populateBulletsData();
+    }
+    if (cannonballsSection) {
+        populateCannonballsData();
+    }
+}
+
+function populateBulletsData() {
+    const bulletsGrid = document.getElementById('bullets-data');
+    if (!bulletsGrid) return;
+
+    Object.entries(gameData.gameplay.bullets).forEach(([bulletName, bulletData]) => {
+        const bulletCard = document.createElement('div');
+        bulletCard.className = 'data-item';
+        bulletCard.dataset.rarity = bulletData.rarity;
+
+        const bulletTitle = document.createElement('h4');
+        bulletTitle.textContent = bulletName;
+        bulletTitle.className = `rarity-${bulletData.rarity}`;
+        bulletCard.appendChild(bulletTitle);
+
+        const stats = [
+            { label: 'Damage', value: bulletData.damage },
+            { label: 'Rarity', value: bulletData.rarity },
+            { label: 'Price', value: bulletData.price ? `${bulletData.price} Gold` : 'Free' },
+            { label: 'Description', value: bulletData.description }
+        ];
+
+        stats.forEach(stat => {
+            if (stat.value) {
+                const property = document.createElement('div');
+                property.className = 'property';
+                property.innerHTML = `
+                    <span class="property-name">${stat.label}:</span>
+                    <span class="property-value">${stat.value}</span>
+                `;
+                bulletCard.appendChild(property);
+            }
+        });
+
+        bulletsGrid.appendChild(bulletCard);
+    });
+}
+
+function populateItemsData() {
+    // Clear all item grids
+    const grids = ['swords-data', 'guns-data', 'keys-data', 'chests-data'];
+    grids.forEach(gridId => {
+        const grid = document.getElementById(gridId);
+        if (grid) grid.innerHTML = '';
+    });
+
+    // Populate Swords
+    const swordsGrid = document.getElementById('swords-data');
+    // console.log('Swords grid element:', swordsGrid);
+    // console.log('Swords data:', gameData.gameplay?.items?.weapons?.swords);
+    
+    if (swordsGrid && gameData.gameplay?.items?.weapons?.swords) {
+        Object.entries(gameData.gameplay.items.weapons.swords).forEach(([name, data]) => {
+            // console.log('Creating sword card for:', name, data);
+            const itemCard = createItemCard(name, {
+                ...data,
+                type: 'Sword',
+                stats: [
+                    { label: 'Damage', value: data.Damage || data.damage },
+                    { label: 'Level Required', value: data.Level || data.level },
+                    { label: 'Sell Price', value: `${data.SellPrice || data.sellPrice} Gold` },
+                    { label: 'Rarity', value: data.Rarity || data.rarity },
+                    { label: 'Description', value: data.Description || data.description }
+                ].filter(stat => stat.value !== undefined)
+            });
+            swordsGrid.appendChild(itemCard);
+        });
+    } else {
+        // console.log('Missing swords grid or data:', {
+        //     gridExists: !!swordsGrid,
+        //     dataExists: !!gameData.gameplay?.items?.weapons?.swords
+        // });
+    }
+
+    // Populate Guns
+    const gunsGrid = document.getElementById('guns-data');
+    if (gunsGrid && gameData.gameplay && gameData.gameplay.items && gameData.gameplay.items.weapons && gameData.gameplay.items.weapons.guns) {
+        Object.entries(gameData.gameplay.items.weapons.guns).forEach(([name, data]) => {
+            const itemCard = createItemCard(name, {
+                ...data,
+                type: 'Gun',
+                stats: [
+                    { label: 'Damage', value: data.damage },
+                    { label: 'Range', value: data.range },
+                    { label: 'Rarity', value: data.rarity },
+                    data.spread ? { label: 'Spread', value: 'Yes' } : null
+                ].filter(Boolean)
+            });
+            gunsGrid.appendChild(itemCard);
+        });
+    }
+
+    // Populate Keys
+    const keysGrid = document.getElementById('keys-data');
+    if (keysGrid && gameData.gameplay && gameData.gameplay.items && gameData.gameplay.items.keys) {
+        Object.entries(gameData.gameplay.items.keys).forEach(([name, data]) => {
+            const itemCard = createItemCard(name, {
+                ...data,
+                type: 'Key',
+                stats: [
+                    { label: 'Rarity', value: data.rarity },
+                    { label: 'Opens', value: data.chestType }
+                ]
+            });
+            keysGrid.appendChild(itemCard);
+        });
+    }
+
+    // Populate Chests
+    const chestsGrid = document.getElementById('chests-data');
+    if (chestsGrid && gameData.gameplay && gameData.gameplay.items && gameData.gameplay.items.chests) {
+        Object.entries(gameData.gameplay.items.chests).forEach(([name, data]) => {
+            const itemCard = createItemCard(name, {
+                ...data,
+                type: 'Chest',
+                stats: [
+                    { label: 'Rarity', value: data.rarity },
+                    { label: 'Key Type', value: data.keyType },
+                ]
+            });
+            chestsGrid.appendChild(itemCard);
+        });
+    }
+
+    // Add debug logging
+    // console.log('Gameplay data structure:', gameData.gameplay);
+}
+
+function createItemCard(name, data) {
+    const itemCard = document.createElement('div');
+    itemCard.className = 'data-item';
+    itemCard.dataset.rarity = data.rarity;
+    itemCard.dataset.type = data.type;
+
+    const title = document.createElement('h4');
+    title.textContent = name;
+    title.className = `rarity-${data.rarity.toLowerCase()}`;
+    itemCard.appendChild(title);
+
+    data.stats.forEach(stat => {
+        if (stat && stat.value) {
+            const property = document.createElement('div');
+            property.className = 'property';
+            property.innerHTML = `
+                <span class="property-name">${stat.label}:</span>
+                <span class="property-value">${stat.value}</span>
+            `;
+            itemCard.appendChild(property);
+        }
+    });
+
+    return itemCard;
+}
+
 // Initialize data
 populateShipsData();
 populateSkillsData();
 populateQuestsData();
 populateNPCsData();
+populateGameplayData();
 
 // Collapsible sections handling
 function createCollapsible(title, content) {
@@ -317,33 +548,13 @@ function initializeData() {
             container.appendChild(contentDiv);
         });
     }
-
-    // Display subdirectory data
-    const subDirMapping = {
-        'quests-data': questsData,
-        'npcs-data': npcsData,
-        'loot-data': lootData,
-        'items-data': itemsData,
-        'sword-skills-data': swordSkillsData
-    };
-
-    for (const [elementId, data] of Object.entries(subDirMapping)) {
-        const container = document.getElementById(elementId);
-        if (!container || !data) continue;
-
-        Object.entries(data).forEach(([key, value]) => {
-            const { collapsible, contentDiv } = createCollapsible(key, '');
-            const content = document.createElement('div');
-            content.appendChild(createDataItem(key, value));
-            contentDiv.appendChild(content);
-            container.appendChild(collapsible);
-            container.appendChild(contentDiv);
-        });
-    }
 }
 
 // Initialize the page
-document.addEventListener('DOMContentLoaded', initializeData);
+document.addEventListener('DOMContentLoaded', () => {
+    initializeData();
+    showSection('ships-section');
+});
 
 // Update the showSection function to include the new sections
 function showSection(sectionId) {
@@ -355,6 +566,12 @@ function showSection(sectionId) {
     const activeSection = document.getElementById(sectionId);
     if (activeSection) {
         activeSection.classList.add('active');
+
+        // Handle ammunition sections visibility
+        const ammunitionSection = activeSection.querySelector('.ammunition-section');
+        if (ammunitionSection) {
+            ammunitionSection.style.display = SHOW_AMMUNITION ? 'block' : 'none';
+        }
     }
 
     // Update active button
@@ -367,16 +584,15 @@ function showSection(sectionId) {
     });
 
     // Populate data based on section
-    if (sectionId === 'ships-section') {
+    if (sectionId === 'ships') {
         populateShipsData();
-    } else if (sectionId === 'quests-section') {
+    } else if (sectionId === 'quests') {
         populateQuestsData();
-    } else if (sectionId === 'npcs-section') {
+    } else if (sectionId === 'npcs') {
         populateNPCsData();
+    } else if (sectionId === 'gameplay') {
+        populateGameplayData();
+    } else if (sectionId === 'skills') {
+        populateSkillsData();
     }
 }
-
-// Call showSection('ships-section') when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    showSection('ships-section');
-});

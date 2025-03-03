@@ -19,9 +19,12 @@
                         </a>
                     </h1>
                     <p class="subtitle">Wiki</p>
+                    <div class="sloop-container">
+                        <img src="Images/Sloop.png" alt="Sloop" class="sloop">
+                        <div class="wave"></div>
+                    </div>
                 </div>
             </div>
-            <div class="compass"></div>
         </header>
 
         <nav class="main-nav">
@@ -29,6 +32,7 @@
             <button class="nav-btn" data-section="skills">Skills</button>
             <button class="nav-btn" data-section="quests">Quests</button>
             <button class="nav-btn" data-section="npcs">NPCs</button>
+            <button class="nav-btn" data-section="gameplay">Gameplay</button>
         </nav>
 
         <main>
@@ -108,6 +112,40 @@
                 <h2>NPCs</h2>
                 <div class="section-content" id="npcs-data">
                     <!-- NPCs data will be populated here -->
+                </div>
+            </section>
+
+            <section id="gameplay" class="data-section">
+                <h2>Gameplay</h2>
+                <div class="section-content">
+                    <div class="gameplay-category">
+                        <h3>Enemies</h3>
+                        <div class="enemies-grid" id="enemies-data">
+                            <!-- Enemies data will be populated here -->
+                        </div>
+                    </div>
+
+                    <div class="gameplay-category">
+                        <h3>All Items</h3>
+                        <div class="items-subsections">
+                            <div class="item-subsection" id="swords-section">
+                                <h5>Swords</h5>
+                                <div class="items-grid" id="swords-data"></div>
+                            </div>
+                            <div class="item-subsection" id="guns-section">
+                                <h5>Guns</h5>
+                                <div class="items-grid" id="guns-data"></div>
+                            </div>
+                            <div class="item-subsection" id="keys-section">
+                                <h5>Keys</h5>
+                                <div class="items-grid" id="keys-data"></div>
+                            </div>
+                            <div class="item-subsection" id="chests-section">
+                                <h5>Chests</h5>
+                                <div class="items-grid" id="chests-data"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 

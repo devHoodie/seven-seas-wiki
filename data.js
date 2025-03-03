@@ -776,26 +776,529 @@ const gameData = {
             id: 8,
             name: "Liza Tide"
         }
-    ]
+    ],
+    gameplay: {
+        enemies: {
+            "Baby Fly Trap Lvl. 1": "Baby Fly Trap",
+            "Giant Fly Trap Lvl. 6": "Giant Fly Trap",
+            "Wasp Lvl. 7": "Wasp",
+            "Giant Wasp Lvl. 18": "Giant Wasp",
+            "Giant Crab Lvl. 4": "Giant Crab",
+            "Giant Crab Lvl. 11": "Giant Crab Elite",
+            "Navy Guard Lvl. 4": "Navy Guard",
+            "Navy Marine Lvl. 8": "Navy Marine",
+            "Navy Sergeant Lvl. 15": "Navy Sergeant",
+            "Admiral Edward Vernon Lvl. 24": "Admiral Vernon",
+            "Skeleton Lvl. 5": "Skeleton",
+            "Skeleton Lvl. 13": "Spectral Skeleton",
+            "Francis Baunt Lvl. 17": "Francis Baunt",
+            "Jerry Strauss Lvl. 13": "Jerry Strauss",
+            "Undead Maitre Lvl. 14": "Undead Maitre",
+            "Dreg Lvl. 23": "Dreg"
+        },
+        bullets: {
+            "Lead Shot": {
+                id: 1,
+                damage: 4,
+                rarity: "Common",
+                speed: 8,
+                range: 50,
+                description: "Standard lead ammunition"
+            },
+            "Venom Shot": {
+                id: 2,
+                damage: 11,
+                rarity: "Common",
+                price: 5,
+                effect: {
+                    name: "Venoms",
+                    type: "DOT",
+                    color: "Green",
+                    duration: 4,
+                    tickDamage: 2,
+                    ticks: 4
+                },
+                description: "Poisoned ammunition that deals damage over time"
+            },
+            "Bane Shot": {
+                id: 3,
+                damage: 16,
+                rarity: "Uncommon",
+                price: 10,
+                effect: {
+                    name: "Weakens",
+                    type: "Weaken",
+                    duration: 4,
+                    multiplier: 0.75
+                },
+                description: "Cursed ammunition that weakens enemies"
+            },
+            "Drag Shot": {
+                id: 4,
+                damage: 22,
+                rarity: "Rare",
+                price: 25,
+                effect: {
+                    name: "Slows",
+                    type: "Slow",
+                    duration: 3,
+                    multiplier: 0.6
+                },
+                description: "Heavy ammunition that slows down targets"
+            },
+            "Silver Shot": {
+                id: 5,
+                damage: 45,
+                rarity: "Epic",
+                price: 65,
+                effect: {
+                    name: "Undead bonus",
+                    bonus: "Dead",
+                    weakness: "Living"
+                },
+                description: "Silver ammunition effective against undead enemies"
+            },
+            "Steel Shot": {
+                id: 6,
+                damage: 55,
+                rarity: "Legendary",
+                price: 65,
+                effect: {
+                    name: "Living bonus",
+                    bonus: "Living",
+                    weakness: "Dead"
+                },
+                description: "Steel ammunition effective against living enemies"
+            }
+        },
+        cannonballs: {
+            "Round Shot": {
+                id: 1,
+                rarity: "Common",
+                price: 0,
+                shots: 3,
+                cooldown: 0.85,
+                reloadTime: 1.5,
+                baseTravelTime: 0.85,
+                maxDistance: 350,
+                minDistance: 5,
+                damages: {
+                    sail: 20,
+                    hull: 40
+                },
+                description: "A basic all around cannonball"
+            },
+            "Chain Shot": {
+                id: 2,
+                rarity: "Common",
+                price: 2,
+                shots: 3,
+                cooldown: 0.85,
+                reloadTime: 1.5,
+                baseTravelTime: 1,
+                maxDistance: 250,
+                minDistance: 5,
+                damages: {
+                    sail: 70,
+                    hull: 20
+                },
+                description: "Cannonball effective against masts and sails"
+            },
+            "Firebrand": {
+                id: 3,
+                rarity: "Uncommon",
+                price: 4,
+                shots: 3,
+                cooldown: 1.1,
+                reloadTime: 1.5,
+                baseTravelTime: 0.95,
+                maxDistance: 400,
+                minDistance: 30,
+                damages: {
+                    sail: 25,
+                    hull: 65
+                },
+                description: "Cannonball that does good damage to hulls"
+            },
+            "Thunderbolt": {
+                id: 4,
+                rarity: "Rare",
+                price: 10,
+                shots: 3,
+                cooldown: 2,
+                reloadTime: 1.5,
+                baseTravelTime: 0.7,
+                maxDistance: 535,
+                minDistance: 40,
+                damages: {
+                    sail: 175,
+                    hull: 145
+                },
+                description: "Cannonball that travels fast and has high damage overall"
+            },
+            "Explosive": {
+                id: 5,
+                rarity: "Epic",
+                price: 14,
+                shots: 3,
+                cooldown: 4,
+                reloadTime: 1.5,
+                baseTravelTime: 1.3,
+                maxDistance: 150,
+                minDistance: 25,
+                damages: {
+                    sail: 55,
+                    hull: 350
+                },
+                description: "Cannonball that does heavy damage to hulls"
+            },
+            "Fury": {
+                id: 6,
+                rarity: "Legendary",
+                price: 20,
+                shots: 3,
+                cooldown: 1.3,
+                reloadTime: 1.5,
+                baseTravelTime: 0.85,
+                maxDistance: 400,
+                minDistance: 45,
+                damages: {
+                    sail: 250,
+                    hull: 250
+                },
+                description: "A furious cannonball"
+            }
+        },
+        items: {
+            weapons: {
+                swords: {
+                    // Common
+                    "Rusty Cutlass": {
+                        damage: 4,
+                        rarity: "Common",
+                        description: "A rusty cutlass useful for learning.",
+                        level: 1,
+                        sellPrice: 3
+                    },
+                    "Training Sabre": {
+                        damage: 3,
+                        rarity: "Common",
+                        description: "A rusty sabre useful for learning.",
+                        level: 1,
+                        sellPrice: 2
+                    },
+                    "Brine Cutlass": {
+                        damage: 5,
+                        rarity: "Common",
+                        description: "A seaworn cutlass often found on sunken ships.",
+                        level: 1,
+                        sellPrice: 4
+                    },
+    
+                    // Uncommon
+                    "Ironvein Cutlass": {
+                        damage: 9,
+                        rarity: "Uncommon",
+                        description: "A sturdy cutlass forged from iron-rich veins.",
+                        level: 8,
+                        sellPrice: 10
+                    },
+                    "Ironvein Sabre": {
+                        damage: 8,
+                        rarity: "Uncommon",
+                        description: "A durable sabre crafted from iron ore.",
+                        level: 6,
+                        sellPrice: 8
+                    },
+                    "Pyrestone Sabre": {
+                        damage: 7,
+                        rarity: "Uncommon",
+                        description: "A sabre infused with the essence of flames.",
+                        level: 4,
+                        sellPrice: 7
+                    },
+    
+                    // Rare
+                    "Krakenfang Cutlass": {
+                        damage: 13,
+                        rarity: "Rare",
+                        description: "A cutlass said to be made from the fangs of a legendary sea beast.",
+                        level: 15,
+                        sellPrice: 50
+                    },
+                    "Gleam Cutlass": {
+                        damage: 12,
+                        rarity: "Rare",
+                        description: "A brilliantly polished cutlass that gleams in the light.",
+                        level: 14,
+                        sellPrice: 40
+                    },
+                    "Watervein Cutlass": {
+                        damage: 11,
+                        rarity: "Rare",
+                        description: "A cutlass that flows with the energy of the tides.",
+                        level: 13,
+                        sellPrice: 30
+                    },
+    
+                    // Epic
+                    "Bloodheart Cutlass": {
+                        damage: 17,
+                        rarity: "Epic",
+                        description: "A sinister cutlass rumored to thirst for battle.",
+                        level: 21,
+                        sellPrice: 230
+                    },
+                    "Viperfang Sabre": {
+                        damage: 16,
+                        rarity: "Epic",
+                        description: "A sabre coated in venom, striking swift and deadly.",
+                        level: 19,
+                        sellPrice: 200
+                    },
+                    "Shadowgold Sabre": {
+                        damage: 15,
+                        rarity: "Epic",
+                        description: "A mysterious sabre forged from darkened gold.",
+                        level: 17,
+                        sellPrice: 180
+                    },
+    
+                    // Legendary
+                    "Goldblade Sabre": {
+                        damage: 27,
+                        rarity: "Legendary",
+                        description: "A sabre of pure gold, radiating untold power.",
+                        level: 25,
+                        sellPrice: 550
+                    },
+                    "Viperfang Cutlass": {
+                        damage: 24,
+                        rarity: "Legendary",
+                        description: "A cutlass of unmatched precision, infused with lethal venom.",
+                        level: 23,
+                        sellPrice: 480
+                    }
+                },
+                guns: {
+                    // Common Guns
+                    "Crude Flintlock": {
+                        damage: 2,
+                        reloadTime: 1.9,
+                        range: "25-35",
+                        rarity: "Common",
+                        description: "A rusty flintlock used by beginners.",
+                        subType: "Flintlock",
+                        level: 1,
+                        sellPrice: 2
+                    },
+                    "Ironheart Blunderbuss": {
+                        damage: 5,
+                        reloadTime: 2.4,
+                        range: "20-40",
+                        rarity: "Common",
+                        description: "A sturdy blunderbuss with a reinforced iron frame.",
+                        subType: "Blunderbuss",
+                        level: 1,
+                        sellPrice: 5
+                    },
+                    "Brine Flintlock": {
+                        damage: 3,
+                        reloadTime: 1.7,
+                        range: "25-35",
+                        rarity: "Common",
+                        description: "A salt-worn flintlock favored by coastal marauders.",
+                        subType: "Flintlock",
+                        level: 1,
+                        sellPrice: 3
+                    },
+    
+                    // Uncommon Guns
+                    "Dreadbronze Flintlock": {
+                        damage: 5,
+                        reloadTime: 1.6,
+                        range: "30-45",
+                        rarity: "Uncommon",
+                        description: "A bronze-cast flintlock known for its reliability.",
+                        subType: "Flintlock",
+                        level: 4,
+                        sellPrice: 10
+                    },
+                    "Beetle Flintlock": {
+                        damage: 6,
+                        reloadTime: 1.4,
+                        range: "25-45",
+                        rarity: "Uncommon",
+                        description: "Carved from beetle chitin, this flintlock is surprisingly durable.",
+                        subType: "Flintlock",
+                        level: 5,
+                        sellPrice: 12
+                    },
+                    "Saberline Blunderbuss": {
+                        damage: 12,
+                        reloadTime: 2.2,
+                        range: "20-35",
+                        rarity: "Uncommon",
+                        description: "A sleek blunderbuss with a serrated barrel for close encounters.",
+                        subType: "Blunderbuss",
+                        level: 6,
+                        sellPrice: 24
+                    },
+    
+                    // Rare Guns
+                    "Venomshade Flintlock": {
+                        damage: 12,
+                        reloadTime: 1.4,
+                        range: "35-65",
+                        rarity: "Rare",
+                        description: "Infused with venomous alloys, each shot carries a toxic bite.",
+                        subType: "Flintlock",
+                        level: 8,
+                        sellPrice: 34
+                    },
+                    "Bloodheart Blunderbuss": {
+                        damage: 17,
+                        reloadTime: 2.4,
+                        range: "35-40",
+                        rarity: "Rare",
+                        description: "A brutal blunderbuss that resonates with the wielder's fury.",
+                        subType: "Blunderbuss",
+                        level: 11,
+                        sellPrice: 44
+                    },
+                    "Ironvein Musket": {
+                        damage: 21,
+                        reloadTime: 2.5,
+                        range: "50-130",
+                        rarity: "Rare",
+                        description: "A long-barreled musket with precision iron sights.",
+                        subType: "Musket",
+                        level: 14,
+                        sellPrice: 52
+                    },
+    
+                    // Epic Guns
+                    "Goldbone Blunderbuss": {
+                        damage: 21,
+                        reloadTime: 1.9,
+                        range: "25-45",
+                        rarity: "Epic",
+                        description: "A gilded blunderbuss symbolizing both wealth and power.",
+                        subType: "Blunderbuss",
+                        level: 17,
+                        sellPrice: 230
+                    },
+                    "General's Musket": {
+                        damage: 28,
+                        reloadTime: 2.0,
+                        range: "50-150",
+                        rarity: "Epic",
+                        description: "Issued to high-ranking officers, this musket boasts unmatched accuracy.",
+                        subType: "Musket",
+                        level: 21,
+                        sellPrice: 270
+                    },
+    
+                    // Legendary Guns
+                    "Aristocrat Blunderbuss": {
+                        damage: 29,
+                        reloadTime: 1.0,
+                        range: "30-50",
+                        rarity: "Legendary",
+                        description: "An exquisitely crafted blunderbuss for the elite.",
+                        subType: "Blunderbuss",
+                        level: 26,
+                        sellPrice: 580
+                    },
+                    "Aristocrat Flintlock": {
+                        damage: 25,
+                        reloadTime: 0.825,
+                        range: "40-75",
+                        rarity: "Legendary",
+                        description: "A masterwork flintlock adorned with precious metals.",
+                        subType: "Flintlock",
+                        level: 25,
+                        sellPrice: 500
+                    }
+                }
+            },
+            chests: {
+                "Bronze Key Chest": {
+                    type: "Key Chest",
+                    rarity: "Common",
+                    keyType: "Bronze",
+                    minGold: 50,
+                    maxGold: 150
+                },
+                "Silver Key Chest": {
+                    type: "Key Chest",
+                    rarity: "Uncommon",
+                    keyType: "Silver",
+                    minGold: 150,
+                    maxGold: 300
+                },
+                "Gold Key Chest": {
+                    type: "Key Chest",
+                    rarity: "Rare",
+                    keyType: "Gold",
+                    minGold: 300,
+                    maxGold: 600
+                },
+                "Sapphire Key Chest": {
+                    type: "Key Chest",
+                    rarity: "Epic",
+                    keyType: "Sapphire",
+                    minGold: 600,
+                    maxGold: 1200
+                },
+                "Emerald Key Chest": {
+                    type: "Key Chest",
+                    rarity: "Epic",
+                    keyType: "Emerald",
+                    minGold: 800,
+                    maxGold: 1600
+                },
+                "Ruby Key Chest": {
+                    type: "Key Chest",
+                    rarity: "Legendary",
+                    keyType: "Ruby",
+                    minGold: 1000,
+                    maxGold: 2000
+                }
+            },
+            keys: {
+                "Bronze Key": {
+                    type: "Key",
+                    rarity: "Common",
+                    chestType: "Bronze Key Chest"
+                },
+                "Silver Key": {
+                    type: "Key",
+                    rarity: "Uncommon",
+                    chestType: "Silver Key Chest"
+                },
+                "Gold Key": {
+                    type: "Key",
+                    rarity: "Rare",
+                    chestType: "Gold Key Chest"
+                },
+                "Sapphire Key": {
+                    type: "Key",
+                    rarity: "Epic",
+                    chestType: "Sapphire Key Chest"
+                },
+                "Emerald Key": {
+                    type: "Key",
+                    rarity: "Epic",
+                    chestType: "Emerald Key Chest"
+                },
+                "Ruby Key": {
+                    type: "Key",
+                    rarity: "Legendary",
+                    chestType: "Ruby Key Chest"
+                }
+            },
+            
+        }
+    }
 };
-
-// Subdirectory data
-const questsData = {
-    // We'll need to get these from the Quests directory
-};
-
-const npcsData = {
-    // We'll need to get these from the NPCs directory
-};
-
-const lootData = {
-    // We'll need to get these from the Loot directory
-};
-
-const itemsData = {
-    // We'll need to get these from the Items directory
-};
-
-const swordSkillsData = {
-    // We'll need to get these from the SwordSkills directory
-}; 
