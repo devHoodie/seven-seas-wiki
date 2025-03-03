@@ -1,0 +1,599 @@
+:root {
+    --primary-color: #1a4b84;
+    --secondary-color: #c4a484;
+    --accent-color: #d4af37;
+    --background-color: #f4f1ea;
+    --text-color: #2c1810;
+    --card-background: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.title-group {
+    display: flex;
+    align-items: flex-end;
+    gap: 2rem;
+}
+
+.title-group h1 {
+    margin-bottom: 0;
+}
+
+.game-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.game-thumbnail {
+    display: block;
+    margin: 2rem auto;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+}
+
+.title-group {
+    text-align: left;
+}
+
+h1 {
+    font-family: 'Pirata One', cursive;
+    font-size: 4rem;
+    color: var(--primary-color);
+    text-shadow: 2px 2px 4px var(--shadow-color);
+    margin-bottom: 1rem;
+}
+
+.compass {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%231a4b84"><path d="M12 2L8 11h8L12 2zm0 20l4-9H8l4 9z"/></svg>') no-repeat center;
+    animation: spin 20s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.nav-btn {
+    background-color: var(--card-background);
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.nav-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.data-section {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.data-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    font-family: 'Pirata One', cursive;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.section-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.data-card {
+    background-color: var(--card-background);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: transform 0.3s ease;
+}
+
+.data-card:hover {
+    transform: translateY(-5px);
+}
+
+h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.data-content {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+.data-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.data-content::-webkit-scrollbar-track {
+    background: var(--background-color);
+    border-radius: 4px;
+}
+
+.data-content::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+.data-content::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    .main-nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .nav-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .section-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Data Display Styles */
+.data-item {
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.data-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.data-item p {
+    margin: 0.3rem 0;
+    font-size: 0.9rem;
+}
+
+.data-item .property {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.3rem 0;
+}
+
+.data-item .property-name {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.data-item .property-value {
+    color: var(--text-color);
+}
+
+/* Collapsible Sections */
+.collapsible {
+    cursor: pointer;
+    padding: 0.5rem;
+    background-color: var(--background-color);
+    border: none;
+    text-align: left;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.collapsible:hover {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.collapsible::after {
+    content: '▼';
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.collapsible.active::after {
+    transform: rotate(180deg);
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.collapsible-content.active {
+    max-height: 500px;
+}
+
+.game-title {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+.game-title:hover {
+    color: var(--accent-color);
+}
+
+.subtitle {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    padding-bottom: 0.5rem;
+}
+
+/* Rarity Colors */
+.rarity-Common {
+    color: #ffffff;
+}
+
+.rarity-Uncommon {
+    color: #1eff00;
+}
+
+.rarity-Rare {
+    color: #0070dd;
+}
+
+.rarity-Epic {
+    color: #a335ee;
+}
+
+.rarity-Legendary {
+    color: #ff8000;
+}
+
+.data-item[data-rarity="Common"] {
+    border-left-color: #ffffff;
+}
+
+.data-item[data-rarity="Uncommon"] {
+    border-left-color: #1eff00;
+}
+
+.data-item[data-rarity="Rare"] {
+    border-left-color: #0070dd;
+}
+
+.data-item[data-rarity="Epic"] {
+    border-left-color: #a335ee;
+}
+
+.data-item[data-rarity="Legendary"] {
+    border-left-color: #ff8000;
+}
+
+/* Sub-properties */
+.sub-properties {
+    margin-left: 1rem;
+    font-size: 0.9em;
+}
+
+.sub-property {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.2rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid var(--secondary-color);
+}
+
+.sub-property-name {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.sub-property-value {
+    color: var(--text-color);
+}
+
+/* Skills Section */
+.skill-category {
+    background: var(--card-background);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: transform 0.2s;
+    width: 100%;
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+}
+
+.skill-category h3 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 0.5rem;
+}
+
+.skill-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.actions-content {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+}
+
+.actions-content::-webkit-scrollbar {
+    height: 8px;
+}
+
+.actions-content::-webkit-scrollbar-track {
+    background: var(--background-color);
+    border-radius: 4px;
+}
+
+.actions-content::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+.skill-item {
+    background: var(--background-color);
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: transform 0.2s;
+    min-width: 250px;
+    flex: 1;
+}
+
+.skill-item:hover {
+    transform: translateY(-2px);
+}
+
+.skill-name {
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.skill-description {
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+.skill-level {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.skill-bonus {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+}
+
+.passives-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .actions-content {
+        flex-wrap: wrap;
+    }
+    
+    .skill-item {
+        min-width: calc(50% - 0.5rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .skill-item {
+        min-width: 100%;
+    }
+}
+
+.ships-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.ship-card {
+    background: var(--card-background);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: transform 0.3s ease;
+}
+
+.ship-card:hover {
+    transform: translateY(-5px);
+}
+
+.ship-header {
+    border-bottom: 2px solid var(--secondary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+.ship-name {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.ship-npc-name {
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.ship-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.ship-stat {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background: var(--background-color);
+    border-radius: 8px;
+}
+
+.stat-label {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.stat-value {
+    color: var(--text-color);
+}
+
+/* Quests Section */
+.quest-type-section {
+    margin-bottom: 2rem;
+}
+
+.quest-type-section h3 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.quests-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+/* NPCs Section */
+.npcs-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.npcs-list .data-item {
+    background: var(--card-background);
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: transform 0.2s;
+}
+
+.npcs-list .data-item:hover {
+    transform: translateY(-3px);
+}
+
+.npcs-list h4 {
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .quests-list,
+    .npcs-list {
+        grid-template-columns: 1fr;
+    }
+}

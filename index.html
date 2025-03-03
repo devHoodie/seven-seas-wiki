@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seven Seas - Game Data</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="title-group">
+                    <img src="Images/Icon521x521.png" alt="Seven Seas Icon" class="game-icon">
+                    <h1>
+                        <a href="https://www.roblox.com/games/17131270416/Seven-Seas-Alpha" target="_blank" class="game-title">
+                            Seven Seas
+                        </a>
+                    </h1>
+                    <p class="subtitle">Wiki</p>
+                </div>
+            </div>
+            <div class="compass"></div>
+        </header>
+
+        <nav class="main-nav">
+            <button class="nav-btn active" data-section="ships">Ships</button>
+            <button class="nav-btn" data-section="skills">Skills</button>
+            <button class="nav-btn" data-section="quests">Quests</button>
+            <button class="nav-btn" data-section="npcs">NPCs</button>
+        </nav>
+
+        <main>
+            <section id="ships" class="data-section active">
+                <h2>Ships</h2>
+                <div class="ships-grid" id="ships-data">
+                    <!-- Ships data will be populated here -->
+                </div>
+            </section>
+
+            <section id="skills" class="data-section">
+                <h2>Skills</h2>
+                <div class="section-content">
+                    <div class="skill-category" data-skill="Sailing">
+                        <h3>Sailing</h3>
+                        <div class="skill-details">
+                            <div class="actions">
+                                <h4>Active Abilities</h4>
+                                <div class="actions-content"></div>
+                            </div>
+                            <div class="passives">
+                                <h4>Passive Abilities</h4>
+                                <div class="passives-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-category" data-skill="Sword">
+                        <h3>Sword</h3>
+                        <div class="skill-details">
+                            <div class="actions">
+                                <h4>Active Abilities</h4>
+                                <div class="actions-content"></div>
+                            </div>
+                            <div class="passives">
+                                <h4>Passive Abilities</h4>
+                                <div class="passives-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-category" data-skill="Gun">
+                        <h3>Gun</h3>
+                        <div class="skill-details">
+                            <div class="actions">
+                                <h4>Active Abilities</h4>
+                                <div class="actions-content"></div>
+                            </div>
+                            <div class="passives">
+                                <h4>Passive Abilities</h4>
+                                <div class="passives-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-category" data-skill="Cannoning">
+                        <h3>Cannoning</h3>
+                        <div class="skill-details">
+                            <div class="actions">
+                                <h4>Active Abilities</h4>
+                                <div class="actions-content"></div>
+                            </div>
+                            <div class="passives">
+                                <h4>Passive Abilities</h4>
+                                <div class="passives-content"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="quests" class="data-section">
+                <h2>Quests</h2>
+                <div class="section-content" id="quests-data">
+                    <!-- Quests data will be populated here -->
+                </div>
+            </section>
+
+            <section id="npcs" class="data-section">
+                <h2>NPCs</h2>
+                <div class="section-content" id="npcs-data">
+                    <!-- NPCs data will be populated here -->
+                </div>
+            </section>
+
+            <img src="Images/Thumbnail1024x589.png" alt="Seven Seas Thumbnail" class="game-thumbnail">
+        </main>
+    </div>
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
